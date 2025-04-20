@@ -17,6 +17,7 @@ import lessonRoutes from './routes/lessons.js';
 import analyticsRoutes from './routes/analytics.js';
 import tutorRoutes from './routes/tutor.js';
 import adminRoutes from './routes/admin.js';
+import studentContentRoutes from './routes/studentContent.js';
 
 import { onlyLocalhost } from './middleware/localhost.js';
 
@@ -51,6 +52,7 @@ app.register(quizRoutes, { prefix: '/api/quizzes', preHandler: [app.authenticate
 app.register(lessonRoutes, { prefix: '/api/lessons', preHandler: [app.authenticate, app.authorize('TEACHER')] });
 app.register(analyticsRoutes, { prefix: '/api/analytics', preHandler: [app.authenticate, app.authorize('TEACHER')] });
 app.register(tutorRoutes, { prefix: '/api/tutor', preHandler: [app.authenticate, app.authorize('STUDENT')] });
+app.register(studentContentRoutes, { prefix: '/api/student', preHandler: [app.authenticate, app.authorize('STUDENT')] });
 app.register(adminRoutes, { prefix: '/api/admin/users', preHandler: [app.authenticate, app.authorize('ADMIN'), onlyLocalhost] });
 
 const start = async () => {
@@ -64,3 +66,7 @@ const start = async () => {
 };
 
 start();
+
+// @codex
+// Export Fastify app instance for testing
+export { app };

@@ -19,5 +19,13 @@
   "loading": "Loading...",
   "language": "Language",
   "english": "English",
-  "spanish": "Español"
+  "spanish": "Español",
+  "quiz": "Quiz",
+  "lesson": "Lesson",
+  "result": "Result",
+  "strengths": "Strengths",
+  "weaknesses": "Weaknesses",
+  "trends": "Trends",
+  "message": "Message",
+  "send": "Send"
 }
