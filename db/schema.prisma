@@ -1,0 +1,63 @@
+// CODEX: Prisma schema for Feverducation Platform
+// Models: User, Class, Grade, GeneratedContent
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role
+  classes   Class[]  @relation("UserClasses")
+  grades    Grade[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  TEACHER
+  STUDENT
+  ADMIN
+}
+
+model Class {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  teacher     User     @relation(fields: [teacherId], references: [id])
+  teacherId   String
+  students    User[]   @relation("UserClasses")
+  grades      Grade[]
+  lessons     GeneratedContent[]
+  createdAt   DateTime @default(now())
+}
+
+model Grade {
+  id        String   @id @default(uuid())
+  student   User     @relation(fields: [studentId], references: [id])
+  studentId String
+  class     Class    @relation(fields: [classId], references: [id])
+  classId   String
+  value     Float
+  type      String   // assignment, quiz, test
+  createdAt DateTime @default(now())
+}
+
+model GeneratedContent {
+  id        String   @id @default(uuid())
+  class     Class?   @relation(fields: [classId], references: [id])
+  classId   String?
+  creator   User?    @relation(fields: [creatorId], references: [id])
+  creatorId String?
+  type      String   // quiz, lesson, test
+  content   Json
+  createdAt DateTime @default(now())
+}
