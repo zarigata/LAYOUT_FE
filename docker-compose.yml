@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    container_name: fevereducation-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - node_modules:/app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: ["npm", "run", "dev"]
+    restart: unless-stopped
+
+  admin-frontend:
+    build:
+      context: ./frontend
+    container_name: fevereducation-admin-frontend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend:/app
+      - node_modules_admin:/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - ADMIN_MODE=true
+    command: ["npx", "next", "start", "-p", "3001"]
+    restart: unless-stopped
+
+  # Uncomment and configure these if you want backend and ollama services as well
+  # backend:
+  #   build:
+  #     context: ./backend
+  #   container_name: fevereducation-backend
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - ./backend:/app
+  #   environment:
+  #     - NODE_ENV=development
+  #   command: ["npm", "run", "start:dev"]
+  #   restart: unless-stopped
+
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+  #   restart: unless-stopped
+
+volumes:
+  node_modules:
+  node_modules_admin:
+  # ollama-data:
