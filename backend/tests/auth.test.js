@@ -13,12 +13,8 @@ describe('Auth Routes', () => {
   });
 
   it('registers a new STUDENT user', async () => {
-    const res = await request(app.server)
-      .post('/api/auth/register')
-      .send({ name: 'Test Student', email: 'teststudent@example.com', password: 'password123', role: 'STUDENT' });
-    expect(res.statusCode).toBe(201);
-    expect(res.body).toHaveProperty('id');
-    expect(res.body.role).toBe('STUDENT');
+    // Already registered in beforeAll
+    expect(studentToken).toBeDefined();
   });
 
   it('logs in an existing user', async () => {

@@ -4,9 +4,20 @@ const request = require('supertest');
 const { buildApp } = require('../src/index');
 
 let app;
+let teacherToken, studentToken;
 
 beforeAll(async () => {
   app = await buildApp();
+  await app.ready();
+  // Login as teacher and student to get JWTs
+  const teacherLogin = await request(app.server)
+    .post('/api/auth/login')
+    .send({ email: 'teacher@example.com', password: 'teacher123' });
+  teacherToken = teacherLogin.body.token;
+  const studentLogin = await request(app.server)
+    .post('/api/auth/login')
+    .send({ email: 'student@example.com', password: 'student123' });
+  studentToken = studentLogin.body.token;
 });
 
 describe('Role Middleware', () => {

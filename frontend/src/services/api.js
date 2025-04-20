@@ -1,9 +1,11 @@
 // @codex
 // Axios wrapper for API calls with JWT handling
+// CODEX: API service using universal env utility for baseURL (Claude/ChatGPT compatible)
 import axios from 'axios';
+import getEnv from '../utils/env';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: getEnv('VITE_API_URL', 'http://localhost:3001/api'),
 });
 
 // Attach JWT token to headers

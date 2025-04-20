@@ -4,9 +4,16 @@ const request = require('supertest');
 const { buildApp } = require('../src/index');
 
 let app;
+let teacherToken;
 
 beforeAll(async () => {
   app = await buildApp();
+  await app.ready();
+  // Login as teacher to get JWT
+  const teacherLogin = await request(app.server)
+    .post('/api/auth/login')
+    .send({ email: 'teacher@example.com', password: 'teacher123' });
+  teacherToken = teacherLogin.body.token;
 });
 
 describe('Quiz API', () => {

@@ -1,0 +1,7 @@
+// CODEX: Babel configuration for Jest and React
+{
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
