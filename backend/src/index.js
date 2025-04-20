@@ -11,7 +11,14 @@ import prisma from './prisma/client.js';
 // Routes
 import authRoutes from './routes/auth.js';
 import studentRoutes from './routes/students.js';
-// TODO: import classRoutes, quizRoutes, lessonRoutes, analyticsRoutes, adminRoutes
+import classRoutes from './routes/classes.js';
+import quizRoutes from './routes/quizzes.js';
+import lessonRoutes from './routes/lessons.js';
+import analyticsRoutes from './routes/analytics.js';
+import tutorRoutes from './routes/tutor.js';
+import adminRoutes from './routes/admin.js';
+
+import { onlyLocalhost } from './middleware/localhost.js';
 
 const app = Fastify({ logger: true });
 
@@ -39,7 +46,12 @@ app.decorate('authorize', (role) => async (request, reply) => {
 // Register routes
 app.register(authRoutes, { prefix: '/api/auth' });
 app.register(studentRoutes, { prefix: '/api/students', preHandler: [app.authenticate, app.authorize('TEACHER')] });
-// TODO: register other routes with proper prefixes and middleware
+app.register(classRoutes, { prefix: '/api/classes', preHandler: [app.authenticate, app.authorize('TEACHER')] });
+app.register(quizRoutes, { prefix: '/api/quizzes', preHandler: [app.authenticate, app.authorize('TEACHER')] });
+app.register(lessonRoutes, { prefix: '/api/lessons', preHandler: [app.authenticate, app.authorize('TEACHER')] });
+app.register(analyticsRoutes, { prefix: '/api/analytics', preHandler: [app.authenticate, app.authorize('TEACHER')] });
+app.register(tutorRoutes, { prefix: '/api/tutor', preHandler: [app.authenticate, app.authorize('STUDENT')] });
+app.register(adminRoutes, { prefix: '/api/admin/users', preHandler: [app.authenticate, app.authorize('ADMIN'), onlyLocalhost] });
 
 const start = async () => {
   try {

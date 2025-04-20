@@ -1,0 +1,23 @@
+{
+  "login": "Login",
+  "register": "Register",
+  "email": "Email",
+  "password": "Password",
+  "name": "Name",
+  "role": "Role",
+  "teacher": "Teacher",
+  "student": "Student",
+  "admin": "Admin",
+  "logout": "Logout",
+  "welcome": "Welcome, {{name}}!",
+  "classes": "Classes",
+  "quizzes": "Quizzes",
+  "analytics": "Analytics",
+  "lessons": "Lessons",
+  "tutor": "Tutor",
+  "submit": "Submit",
+  "loading": "Loading...",
+  "language": "Language",
+  "english": "English",
+  "spanish": "Español"
+}

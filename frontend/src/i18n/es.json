@@ -1,0 +1,23 @@
+{
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "name": "Nombre",
+  "role": "Rol",
+  "teacher": "Profesor",
+  "student": "Estudiante",
+  "admin": "Administrador",
+  "logout": "Cerrar sesión",
+  "welcome": "¡Bienvenido, {{name}}!",
+  "classes": "Clases",
+  "quizzes": "Cuestionarios",
+  "analytics": "Analíticas",
+  "lessons": "Lecciones",
+  "tutor": "Tutor",
+  "submit": "Enviar",
+  "loading": "Cargando...",
+  "language": "Idioma",
+  "english": "English",
+  "spanish": "Español"
+}

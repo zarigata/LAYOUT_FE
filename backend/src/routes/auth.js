@@ -21,4 +21,9 @@ export default async function (fastify, opts) {
       reply.code(401).send({ error: 'Invalid credentials' });
     }
   });
+
+  // Get current authenticated user
+  fastify.get('/me', { preHandler: [fastify.authenticate] }, async (request, reply) => {
+    reply.send(request.user);
+  });
 }
