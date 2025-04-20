@@ -30,6 +30,7 @@ model Student {
   grades     Json     @default("{}")
   attendance Json     @default("{}")
   analytics  Analytics[]
+  classes    StudentClass[]
 }
 
 model Class {
@@ -37,9 +38,18 @@ model Class {
   name      String
   teacher   User     @relation(fields: [teacherId], references: [id], name: "TeacherClasses")
   teacherId Int
-  students  Student[]
   lessons   Lesson[]
   quizzes   Quiz[]
+  students  StudentClass[]
+}
+
+model StudentClass {
+  id        Int      @id @default(autoincrement())
+  student   Student  @relation(fields: [studentId], references: [id])
+  studentId Int
+  class     Class    @relation(fields: [classId], references: [id])
+  classId   Int
+  @@unique([studentId, classId])
 }
 
 model Quiz {

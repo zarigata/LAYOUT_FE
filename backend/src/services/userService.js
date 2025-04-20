@@ -1,7 +1,7 @@
 // @codex
 // CRUD operations for user management (Admin only)
 import prisma from '../prisma/client.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 /**
  * Fetch all users

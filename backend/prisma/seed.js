@@ -1,6 +1,6 @@
 // @codex
 // Seed script to populate initial data for development
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -83,7 +83,10 @@ async function main() {
     update: {},
     create: {
       classId: class1.id,
-      questions: [{ question: 'What is 2+2?', choices: [2,3,4,5], answer: 4 }],
+      questions: [
+        { question: 'What is 2 + 2?', choices: [2,3,4,5], answer: 4 },
+        { question: 'Solve for x: 2x = 8', choices: [2,4,6,8], answer: 4 }
+      ],
       difficulty: 'Easy',
     },
   });

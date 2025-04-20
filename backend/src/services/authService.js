@@ -1,7 +1,7 @@
 // @codex
 // Business logic for user authentication
 import prisma from '../prisma/client.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 /**
  * Register a new user

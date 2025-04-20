@@ -15,7 +15,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-white shadow-md p-4 flex justify-between items-center">
+    <nav className="bg-white shadow-sm p-4 flex justify-between items-center">
       <div className="flex items-center space-x-4">
         <Link to="/" className="text-xl font-bold text-primary">Feverducation</Link>
         {user && user.role === 'TEACHER' && <Link to="/teacher" className="text-gray-700 hover:text-primary">{t('classes')}</Link>}
@@ -30,7 +30,7 @@ export default function NavBar() {
           <option value="es">{t('spanish')}</option>
         </select>
         {user
-          ? <button onClick={() => { logout(); navigate('/login'); }} className="bg-primary text-white px-3 py-1 rounded">{t('logout')}</button>
+          ? <button onClick={() => { logout(); navigate('/login'); }} className="bg-primary hover:bg-blue-700 text-white px-3 py-1 rounded">{t('logout')}</button>
           : <Link to="/login" className="text-gray-700 hover:text-primary">{t('login')}</Link>
         }
       </div>

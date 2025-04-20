@@ -25,4 +25,21 @@ api.interceptors.response.use(
   }
 );
 
+// @codex
+// Simple in-memory cache for /quizzes & /analytics (5 min TTL)
+const CACHE_TTL = 5 * 60 * 1000;
+const cache = {};
+const originalGet = api.get.bind(api);
+
+api.get = async (url, config) => {
+  if ((url === '/quizzes' || url === '/analytics') && cache[url] && (Date.now() - cache[url].ts < CACHE_TTL)) {
+    return { data: cache[url].data };
+  }
+  const res = await originalGet(url, config);
+  if (url === '/quizzes' || url === '/analytics') {
+    cache[url] = { data: res.data, ts: Date.now() };
+  }
+  return res;
+};
+
 export default api;

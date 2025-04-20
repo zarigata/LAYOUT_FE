@@ -4,7 +4,7 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "dev": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",
@@ -12,17 +12,18 @@
     "test": "jest"
   },
   "dependencies": {
+    "@fastify/cors": "^8.0.0",
+    "@fastify/helmet": "^9.0.0",
+    "@fastify/jwt": "^7.0.0",
+    "@fastify/rate-limit": "^7.0.0",
+    "@prisma/client": "^4.0.0",
     "axios": "^1.0.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "fastify": "^4.1.0",
-    "fastify-helmet": "^10.0.0",
-    "fastify-jwt": "^6.0.0",
-    "fastify-rate-limit": "^7.0.0",
-    "@fastify/cors": "^8.0.0",
-    "bcrypt": "^5.0.1",
+    "feverducation-backend": "file:",
     "jsonwebtoken": "^8.5.1",
-    "prisma": "^4.0.0",
-    "@prisma/client": "^4.0.0"
+    "prisma": "^4.0.0"
   },
   "devDependencies": {
     "jest": "^29.0.0",
