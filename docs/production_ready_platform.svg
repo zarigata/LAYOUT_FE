@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="50" font-family="Arial" font-size="32" font-weight="bold" text-anchor="middle" fill="#333">EduDroid Production Architecture</text>
+  
+  <!-- Cloud Environment Box -->
+  <rect x="50" y="100" width="1100" height="650" rx="20" ry="20" fill="#e6f7ff" stroke="#1890ff" stroke-width="2"/>
+  <text x="600" y="130" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#1890ff">Cloud Production Environment</text>
+  
+  <!-- CDN Box -->
+  <rect x="100" y="160" width="1000" height="100" rx="10" ry="10" fill="#fff" stroke="#1890ff" stroke-width="2"/>
+  <text x="600" y="190" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#1890ff">Content Delivery Network (CDN)</text>
+  <text x="600" y="220" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Static Assets, HTML, CSS, JavaScript, Images</text>
+  
+  <!-- Load Balancer -->
+  <rect x="350" y="280" width="500" height="60" rx="10" ry="10" fill="#fff" stroke="#1890ff" stroke-width="2"/>
+  <text x="600" y="320" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#1890ff">Load Balancer</text>
+  
+  <!-- Frontend Application -->
+  <rect x="100" y="360" width="400" height="180" rx="10" ry="10" fill="#fff" stroke="#6200ee" stroke-width="2"/>
+  <text x="300" y="390" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#6200ee">Frontend (LAYOUT_FE)</text>
+  <text x="300" y="420" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Next.js Application</text>
+  
+  <!-- Frontend Components -->
+  <rect x="120" y="440" width="160" height="80" rx="5" ry="5" fill="#f0e6ff" stroke="#6200ee" stroke-width="1"/>
+  <text x="200" y="470" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Student Portal</text>
+  <text x="200" y="490" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">Dashboard, AI Tutor</text>
+  
+  <rect x="320" y="440" width="160" height="80" rx="5" ry="5" fill="#f0e6ff" stroke="#6200ee" stroke-width="1"/>
+  <text x="400" y="470" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Teacher Portal</text>
+  <text x="400" y="490" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">Dashboard, Class Generator</text>
+  
+  <!-- Backend API Box -->
+  <rect x="700" y="360" width="400" height="180" rx="10" ry="10" fill="#fff" stroke="#03dac6" stroke-width="2"/>
+  <text x="900" y="390" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#03dac6">Backend API</text>
+  <text x="900" y="420" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">RESTful API Services</text>
+  
+  <!-- Backend Components -->
+  <rect x="720" y="440" width="160" height="80" rx="5" ry="5" fill="#e6fff7" stroke="#03dac6" stroke-width="1"/>
+  <text x="800" y="470" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Authentication</text>
+  <text x="800" y="490" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">JWT, Role-based Access</text>
+  
+  <rect x="920" y="440" width="160" height="80" rx="5" ry="5" fill="#e6fff7" stroke="#03dac6" stroke-width="1"/>
+  <text x="1000" y="470" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">CRUD Operations</text>
+  <text x="1000" y="490" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">Users, Courses, Assignments</text>
+  
+  <!-- Database Box -->
+  <rect x="700" y="560" width="400" height="100" rx="10" ry="10" fill="#fff" stroke="#ff9800" stroke-width="2"/>
+  <text x="900" y="590" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#ff9800">Database</text>
+  <text x="900" y="620" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">PostgreSQL / MongoDB</text>
+  
+  <!-- AI Service Box -->
+  <rect x="100" y="560" width="400" height="100" rx="10" ry="10" fill="#fff" stroke="#f44336" stroke-width="2"/>
+  <text x="300" y="590" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#f44336">AI Service</text>
+  <text x="300" y="620" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">LLM API (OpenAI / Ollama)</text>
+  
+  <!-- Admin Panel Box -->
+  <rect x="350" y="680" width="500" height="50" rx="10" ry="10" fill="#fff" stroke="#9c27b0" stroke-width="2"/>
+  <text x="600" y="710" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#9c27b0">Admin Secret Panel (/admin/secret-panel)</text>
+  
+  <!-- Connections -->
+  <!-- CDN to Load Balancer -->
+  <line x1="600" y1="260" x2="600" y2="280" stroke="#1890ff" stroke-width="2"/>
+  <polygon points="600,280 595,270 605,270" fill="#1890ff"/>
+  
+  <!-- Load Balancer to Frontend -->
+  <line x1="500" y1="340" x2="300" y2="360" stroke="#6200ee" stroke-width="2"/>
+  <polygon points="300,360 307,352 310,362" fill="#6200ee"/>
+  
+  <!-- Load Balancer to Backend -->
+  <line x1="700" y1="340" x2="900" y2="360" stroke="#03dac6" stroke-width="2"/>
+  <polygon points="900,360 890,352 893,362" fill="#03dac6"/>
+  
+  <!-- Frontend to Backend -->
+  <line x1="500" y1="450" x2="700" y2="450" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="700,450 690,445 690,455" fill="#333"/>
+  
+  <!-- Backend to Database -->
+  <line x1="900" y1="540" x2="900" y2="560" stroke="#ff9800" stroke-width="2"/>
+  <polygon points="900,560 895,550 905,550" fill="#ff9800"/>
+  
+  <!-- Frontend to AI Service -->
+  <line x1="300" y1="540" x2="300" y2="560" stroke="#f44336" stroke-width="2"/>
+  <polygon points="300,560 295,550 305,550" fill="#f44336"/>
+  
+  <!-- Backend to AI Service -->
+  <line x1="700" y1="500" x2="500" y2="560" stroke="#f44336" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="500,560 507,552 510,562" fill="#f44336"/>
+  
+  <!-- Admin Panel Connections -->
+  <line x1="600" y1="680" x2="600" y2="650" stroke="#9c27b0" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="600" y1="650" x2="400" y2="540" stroke="#9c27b0" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="600" y1="650" x2="800" y2="540" stroke="#9c27b0" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Legend -->
+  <rect x="950" y="680" width="150" height="50" rx="5" ry="5" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="1025" y="700" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">Legend</text>
+  <line x1="960" y1="720" x2="980" y2="720" stroke="#333" stroke-width="2"/>
+  <text x="1020" y="725" font-family="Arial" font-size="12" fill="#333">Direct Connection</text>
+  <line x1="960" y1="740" x2="980" y2="740" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="1025" y="745" font-family="Arial" font-size="12" fill="#333">API Request</text>
+</svg>

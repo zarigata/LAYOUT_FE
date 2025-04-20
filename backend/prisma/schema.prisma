@@ -1,0 +1,70 @@
+// Prisma schema for EduDroid teaching platform
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              Int                @id @default(autoincrement())
+  name            String
+  email           String             @unique
+  role            Role
+  passwordHash    String             @map("password_hash")
+  lessons         Lesson[]           @relation("CreatedLessons")
+  progress        Progress[]
+  trinkets        Trinket[]
+  aiInteractions  AIInteraction[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
+enum Role {
+  student
+  teacher
+  admin
+}
+
+model Lesson {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  content     String
+  createdBy   Int
+  creator     User      @relation("CreatedLessons", fields: [createdBy], references: [id])
+  progress    Progress[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model AIInteraction {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  prompt    String
+  response  String
+  timestamp DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Progress {
+  id               Int       @id @default(autoincrement())
+  userId           Int       @map("user_id")
+  lessonId         Int       @map("lesson_id")
+  completionStatus Boolean   @map("completion_status")
+  score            Float?
+  user             User      @relation(fields: [userId], references: [id])
+  lesson           Lesson    @relation(fields: [lessonId], references: [id])
+  updatedAt        DateTime  @updatedAt
+}
+
+model Trinket {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  userId      Int?     @map("user_id")
+  user        User?    @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}

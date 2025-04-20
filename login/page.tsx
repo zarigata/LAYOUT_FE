@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft } from "lucide-react"
+import { apiClient } from '../lib/api/apiClient';
+import { setAuthTokens, getUserRole } from '../lib/auth/authUtils';
 
 export default function LoginPage() {
   const router = useRouter()
@@ -20,13 +22,25 @@ export default function LoginPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real app, you would authenticate with a backend
-    // For demo purposes, we'll just redirect based on role
-    if (role === "teacher") {
-      router.push("/teacher/dashboard")
-    } else {
-      router.push("/student/dashboard")
+    const doLogin = async () => {
+      try {
+        const response = await apiClient<{ token: string; refreshToken?: string }>(
+          '/auth/login',
+          { method: 'POST', body: { email, password }, requiresAuth: false }
+        )
+        if (response.success && response.data) {
+          setAuthTokens(response.data.token, response.data.refreshToken || '')
+          const userRole = getUserRole()
+          if (userRole === 'teacher') router.push('/teacher/dashboard')
+          else router.push('/student/dashboard')
+        } else {
+          console.error('Login error:', response.error)
+        }
+      } catch (err) {
+        console.error('Login failed:', err)
+      }
     }
+    doLogin()
   }
 
   return (
