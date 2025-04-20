@@ -7,6 +7,9 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import QuizIcon from '@mui/icons-material/Quiz';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AITutor from '../components/AITutor';
+import { useTranslation } from '../i18n';
+import AnimatedButton from '../components/AnimatedButton';
+import { useState } from 'react';
 
 interface StatCard {
   icon: React.ReactNode;
@@ -32,79 +35,63 @@ const statCards: StatCard[] = [
 ];
 
 export default function StudentPortal() {
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = useState(i18n.language || 'en');
   const [tab, setTab] = React.useState(0);
+  const handleLangChange = (e: any) => {
+    setLang(e.target.value);
+    i18n.changeLanguage(e.target.value);
+  };
+
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      {/* Top App Bar */}
-      <AppBar position="static" color="transparent" elevation={0} sx={{ mb: 2 }}>
-        <Toolbar>
-          <Avatar sx={{ bgcolor: 'primary.main', mr: 2 }}>FE</Avatar>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
-            FeverEducation
-          </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
-            <Button color="inherit">Painel</Button>
-            <Button color="inherit">Minhas Aulas</Button>
-            <Button color="inherit">Atividades</Button>
-            <Button color="inherit">AI Tutor</Button>
+    <Fade in timeout={800}>
+      <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #ffe3ec 100%)', py: 6 }}>
+        <Container maxWidth="md">
+          <Box display="flex" justifyContent="flex-end" mb={2}>
+            <Select value={lang} onChange={handleLangChange} size="small" sx={{ bgcolor: '#fff', borderRadius: 2 }}>
+              <MenuItem value="en">English</MenuItem>
+              <MenuItem value="pt">Português</MenuItem>
+            </Select>
           </Box>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <IconButton color="inherit">
-              <Badge badgeContent={1} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <Avatar sx={{ ml: 1, bgcolor: 'secondary.main' }}>S</Avatar>
+          <Box textAlign="center" mb={6}>
+            <img src="/mascot-welcome.svg" alt="Mascot" style={{ width: 100, marginBottom: 14, filter: 'drop-shadow(0 2px 8px #ffb3c6)' }} />
+            <Typography variant="h3" fontWeight={800} color="#dd2476" mb={1}>
+              {t('student_portal')}
+            </Typography>
+            <Typography variant="h6" color="text.secondary" mb={2}>
+              {t('student_welcome')}
+            </Typography>
+            <AnimatedButton size="large" href="/student/dashboard" sx={{ mt: 2 }}>{t('go_to_dashboard')}</AnimatedButton>
           </Box>
-        </Toolbar>
-      </AppBar>
-      {/* Dashboard Header */}
-      <Box sx={{ px: { xs: 2, md: 6 }, py: 2 }}>
-        <Typography variant="h4" fontWeight={700} gutterBottom>Painel do Aluno</Typography>
-        <Typography variant="subtitle1" color="text.secondary" gutterBottom>Bem-vindo(a) de volta</Typography>
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          {statCards.map((card) => (
-            <Grid item xs={12} sm={6} md={3} key={card.label}>
-              <Card sx={{ bgcolor: 'background.paper', borderRadius: 3 }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                    {card.icon}
-                    <Box sx={{ ml: 2 }}>
-                      <Typography variant="h5" fontWeight={700}>{card.value}</Typography>
-                    </Box>
-                  </Box>
-                  <Typography variant="subtitle1" fontWeight={600}>{card.label}</Typography>
-                  <Typography variant="caption" color="text.secondary">{card.sublabel}</Typography>
-                </CardContent>
-              </Card>
+          <Grid container spacing={4} justifyContent="center">
+            <Grid item xs={12} md={6}>
+              <Paper elevation={4} sx={{ p: 3, borderRadius: 4, minHeight: 150, background: 'rgba(255,255,255,0.85)' }}>
+                <Typography variant="h6" fontWeight={700} color="#dd2476" mb={1}>{t('student_features')}</Typography>
+                <ul style={{ margin: 0, paddingLeft: 18 }}>
+                  <li>📚 {t('access_lessons')}</li>
+                  <li>📝 {t('complete_activities')}</li>
+                  <li>🏆 {t('track_progress')}</li>
+                  <li>🎲 {t('enjoy_gamification')}</li>
+                </ul>
+              </Paper>
             </Grid>
-          ))}
-          {/* AI Tutor Quick Access */}
-          <Grid item xs={12} sm={6} md={3}>
-            <Card sx={{ bgcolor: 'background.paper', borderRadius: 3, height: '100%' }}>
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight={700} gutterBottom>AI Tutor</Typography>
-                <AITutor />
-                <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>Abrir Tutor</Button>
-              </CardContent>
-            </Card>
+            <Grid item xs={12} md={6}>
+              <Paper elevation={4} sx={{ p: 3, borderRadius: 4, minHeight: 150, background: 'rgba(255,255,255,0.85)' }}>
+                <Typography variant="h6" fontWeight={700} color="#ff512f" mb={1}>{t('how_it_works')}</Typography>
+                <ul style={{ margin: 0, paddingLeft: 18 }}>
+                  <li>1️⃣ {t('choose_lesson')}</li>
+                  <li>2️⃣ {t('participate_activities')}</li>
+                  <li>3️⃣ {t('earn_rewards')}</li>
+                  <li>4️⃣ {t('have_fun')}</li>
+                </ul>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-        {/* Tabs for Classes, Assignments, Progress */}
-        <Box sx={{ mt: 4 }}>
-          <Tabs value={tab} onChange={(_, v) => setTab(v)} aria-label="student dashboard tabs" textColor="primary" indicatorColor="primary">
-            <Tab label="Aulas" />
-            <Tab label="Atividades" />
-            <Tab label="Progresso" />
-          </Tabs>
-          <Box sx={{ mt: 2 }}>
-            {tab === 0 && <Box sx={{ minHeight: 120, bgcolor: 'background.paper', borderRadius: 3, p: 3, color: 'text.secondary' }}>Lista de aulas matriculadas...</Box>}
-            {tab === 1 && <Box sx={{ minHeight: 120, bgcolor: 'background.paper', borderRadius: 3, p: 3, color: 'text.secondary' }}>Atividades e quizzes pendentes...</Box>}
-            {tab === 2 && <Box sx={{ minHeight: 120, bgcolor: 'background.paper', borderRadius: 3, p: 3, color: 'text.secondary' }}>Gráficos de progresso e desempenho...</Box>}
+          <Box mt={8} textAlign="center">
+            <AnimatedButton href="/">{t('back_to_home')}</AnimatedButton>
           </Box>
-        </Box>
+        </Container>
       </Box>
-    </Box>
+    </Fade>
   );
 }
