@@ -63,7 +63,14 @@ async function main() {
     create: {
       name: 'Math 101',
       teacherId: teacher.id,
-      students: { connect: { id: student.id } },
+    },
+  });
+
+  // CODEX: Link student and class via StudentClass join table
+  await prisma.studentClass.create({
+    data: {
+      studentId: student.id,
+      classId: class1.id,
     },
   });
 
