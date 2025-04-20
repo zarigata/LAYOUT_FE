@@ -44,8 +44,6 @@ services:
       - OLLAMA_MODEL=llama3.2
       - OLLAMA_CONFIG=/ollama/ollama.config.json
     command: ["serve"]
-    networks:
-      - default
 volumes:
   postgres_data:
   ollama_data:

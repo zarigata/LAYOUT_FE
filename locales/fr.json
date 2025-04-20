@@ -1,0 +1,17 @@
+{
+  "greeting": "Bonjour",
+  "farewell": "Au revoir",
+  "teacher_portal": {
+    "title": "Portail Enseignant",
+    "user_management": "Gestion des Utilisateurs",
+    "analytics": "Analytique d'Apprentissage"
+  },
+  "student_portal": {
+    "title": "Portail Étudiant",
+    "class_dashboard": "Tableau de Bord des Cours"
+  },
+  "admin_dashboard": {
+    "title": "Tableau de Bord Administrateur",
+    "user_management": "Gestion des Utilisateurs"
+  }
+}

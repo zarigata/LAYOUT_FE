@@ -1,0 +1,17 @@
+{
+  "greeting": "Hello",
+  "farewell": "Goodbye",
+  "teacher_portal": {
+    "title": "Teacher Portal",
+    "user_management": "User Management",
+    "analytics": "Learning Analytics"
+  },
+  "student_portal": {
+    "title": "Student Portal",
+    "class_dashboard": "Class Dashboard"
+  },
+  "admin_dashboard": {
+    "title": "Administrator Dashboard",
+    "user_management": "User Management"
+  }
+}

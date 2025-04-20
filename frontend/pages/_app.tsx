@@ -1,16 +1,16 @@
-// CODEX: Next.js custom App with MUI ThemeProvider and Android-like dark mode
+// CODEX: Next.js custom App with LanguageProvider and ThemeProvider
 import type { AppProps } from 'next/app';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import theme from '../theme';
-import { appWithTranslation } from 'next-i18next';
+import { LanguageProvider } from '../context/LanguageContext';
+import { ThemeProvider } from '../context/ThemeContext';
+import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
+  // CODEX: Wrap the entire app with ThemeProvider and LanguageProvider for global theming and multilingual support
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
+    <ThemeProvider>
+      <LanguageProvider>
+        <Component {...pageProps} />
+      </LanguageProvider>
     </ThemeProvider>
   );
 }
-
-export default appWithTranslation(MyApp);

@@ -13,10 +13,4 @@ export class AuthController {
     // CODEX: Implement registration logic
     return { status: 'ok' };
   }
-  @Post('forgot-password')
-  forgotPassword(@Body() body: any) {
-    // CODEX: Implement forgot password logic (username + reset code)
-    // Example: validate code, allow password reset
-    return { status: 'pending', message: 'Reset code sent or verified.' };
-  }
 }
